@@ -1,17 +1,31 @@
-// This connects Node.js to your MySQL database
-// Every other backend file uses this connection
+// base configuration
+import mysql from 'mysql2/promise'
+import 'dotenv/config'
 
-const mysql = require("mysql2/promise")
-
+// process.env avoids hardcoding stuff like passwords
 const pool = mysql.createPool({
-  host:     process.env.DB_HOST,      // 1. where MySQL is running (localhost)
-  user:     process.env.DB_USER,      // 2. your MySQL username
-  password: process.env.DB_PASSWORD,  // 3. your MySQL password
-  database: process.env.DB_NAME,      // 4. the database name
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 })
 
-module.exports = pool                 // 5. export so repository can use it
+async function checkDbConnection() {
+  try {
+    const conn = await pool.getConnection()
+    await conn.ping()
+    console.log('DB connection successful')
+    conn.release()
+  } catch (err) {
+    console.error('DB connection failed:', err.message)
+    process.exit(1)     // crash the server hard if DB is unreachable
+  }
+}
 
-// Create a .env file in backend/ with DB_HOST=localhost, DB_USER=root, etc.
-// pool means multiple requests can share connections — better than one connection
-// Only the repository layer imports this — nothing else touches the DB directly
+checkDbConnection()
+
+export default pool
