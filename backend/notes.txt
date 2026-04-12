@@ -1,0 +1,32 @@
+flow:
+Index  → Route → Middleware → Controller → Service → DB
+                                    ↓
+                                Response
+
+backend should have:
+
+1. configuration/db
+ - simply the connection set up meaning ports, user, password...
+
+2. controllers
+ - calls the services
+ - the actions where you label a function and call the function ++ try/catches
+ - handle request or response
+
+3. middleware
+ - security and filters
+ - runs before the controller
+
+4. routes
+ - the map of the backend
+ - where what goes
+
+5. services
+ - the actual actions that happen in the controller 
+ - logic and database
+
+6. index
+ - starts everything
+
+7. package
+ - labels everything

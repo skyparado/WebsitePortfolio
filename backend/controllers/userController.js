@@ -1,5 +1,19 @@
+//base configuration
 import * as userService from '../services/userService.js';
 
+/*
+notes: mysql actions
+format
+  export const *action* = async (req, res) => {
+    try {
+      const {needed features for actions} = action
+      res.status(201).json(user);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+
+*/
 export const createUser = async (req, res) => {
   try {
     const { name, bio } = req.body;

@@ -1,27 +1,35 @@
-// REQUIRED GLOBAL LAYOUT - The wrapper for every single page in your app.
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 
-// import '../src/styles/globals.css'; <-- Add your Tailwind/global css imports here
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Frontend Workshop Blog",
+  description: "A single-page blog built with Next.js and TypeScript.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en">
-      <body className="bg-gray-50 text-gray-900">
-        {/* 1. Global Navigation/Header could go here */}
-        <header className="p-4 bg-white shadow-sm font-bold text-center">
-          My Awesome App
-        </header>
-
-        {/* 2. The actual page content is injected into {children} */}
-        <main className="container mx-auto p-4 min-h-screen">
-          {children}
-        </main>
-
-        {/* 3. Global Footer could go here */}
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col font-sans text-foreground">
+        {children}
       </body>
     </html>
   );
 }
-
-// Rules:
-// - The RootLayout wraps your entire application. Great for Navbar/Footer.
-// - It is rendered on the server by default.

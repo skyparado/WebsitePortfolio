@@ -1,19 +1,18 @@
-import Hero from '../components/Hero';
-import CreatePostForm from '../components/CreatePostForm';
-import PostsSection from '../components/PostsSection';
+// HOMEPAGE ROUTE (URL: / )
+// Pages act as huge Organisms or Templates. They compose Organisms together.
 
-export default async function Home() {
-    return (
-        <div className="mx-auto w-full max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
-            <main className="space-y-10 sm:space-y-12">
-                <Hero
-                    name="Alec Nono"
-                    role="Software Engineer"
-                    bio="Associate Vice President in La Salle Computer Society, Frontend Engineer for Research and Development committee"
-                />
-                <CreatePostForm />
-                <PostsSection />
-            </main>
-        </div>
-    );
+import UserListContainer from '../features/users/containers/UserListContainer';
+
+export default function HomePage() {
+  return (
+    <div className="space-y-8">
+      <section>
+        <h1 className="text-3xl font-bold mb-2">Welcome Home</h1>
+        <p className="text-gray-600 mb-6">Here is a list of users fetched from the backend:</p>
+
+        {/* We drop our smart Container in here */}
+        <UserListContainer />
+      </section>
+    </div>
+  );
 }
