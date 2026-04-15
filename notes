@@ -1,0 +1,55 @@
+Frontend Flow: 
+app/ (Page) → Loads components/ (Lego Blocks) → Runs lib/ (To talk to Backend)
+
+Frontend Components:
+1. app/
+- the map of the frontend 
+    - [twin: routes in backend]
+- name = URL 
+    - (e.g., folder about/ = website.com/about)
+- subcategories: 
+    a. page.tsx 
+        - actual webpage shown for that URL.
+        - should start with: import { projectname } from "@/filename/projectname";
+    b. layout.tsx 
+        - skeleton of the website (the <head> and <body> tags where the pages go).
+    c. globals.css
+        - layout design
+
+2. components/
+- whats inside the page
+- reusable code [note: Hero in line 2 and 9 of page]
+
+3. lib/ (or utils/)
+- contains the functions where you write code to fetch data from your Express backend.
+
+4. tailwind.config.ts / next.config.ts
+simply the setup configuration for the visual design (Tailwind) and the frontend engine (Next.js).
+
+5. .next/
+the compiled output folder Next.js builds automatically.
+completely ignore this folder!
+
+6. package.json
+labels everything installed (React, Next.js, styling packages).
+Does that help clear up the puzzle pieces of the frontend?
+
+
+EXTRA NOTES:
+1. template for pages
+
+export default function *fileName*() {
+    return (
+        <div className="mx-auto w-full max-w-4xl px-5 py-12"> 
+            <h1 className="text-3xl font-bold">My Projects</h1>
+            <p className="mt-4">This is where I'll put all my cool stuff.</p>
+        </div> //closing
+    );
+}
+
+2. differences
+pages and components are different
+a new page == itll update thingy so ull go to like the next slide kinda
+
+3. definitions:
+a. a href = clickable link

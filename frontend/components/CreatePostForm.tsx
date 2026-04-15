@@ -31,7 +31,7 @@ export function CreatePostForm() {
     }
 
     return (
-        <section className="space-y-3 rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6">
+        <section className="space-y-3 rounded-2xl border border-border bg-card glass-card p-5 shadow-sm sm:p-6">
             <div className="space-y-1">
                 <h2 className="text-xl font-semibold tracking-tight text-foreground">Create post</h2>
                 <p className="text-sm text-muted">Share a quick update from the workshop.</p>
@@ -45,7 +45,7 @@ export function CreatePostForm() {
                     value={text}
                     onChange={(event) => setText(event.target.value)}
                     placeholder="Write your post here..."
-                    className="min-h-28 w-full resize-y rounded-xl border border-border bg-background px-4 py-3 text-sm leading-6 text-foreground outline-none transition placeholder:text-muted focus:ring-2 focus:ring-accent/20"
+                    className="min-h-28 w-full resize-y rounded-xl border border-border bg-muted-surface px-4 py-3 text-sm leading-6 text-foreground outline-none transition placeholder:text-muted focus:ring-2 focus:ring-accent/20"
                 />
 
                 {error ? <p className="text-sm text-red-700">{error}</p> : null}

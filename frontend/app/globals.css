@@ -1,34 +1,34 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --border: #e2e8f0;
-  --muted: #475569;
-  --muted-surface: #f1f5f9;
-  --accent: #0f172a;
-  --accent-foreground: #f8fafc;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-border: var(--border);
-  --color-muted: var(--muted);
-  --color-muted-surface: var(--muted-surface);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: #EFD7CF;
+  /* Peach Protein */
+  --foreground: #3A3B2C;
+  /* Darkened Savory Sage */
+  --card: #FFFDF9;
+  /* Warm white for cards - solid color so Tailwind processes it */
+  --border: #c2c395;
+  /* Avocado Smoothie */
+  --muted: #818263;
+  /* Savory Sage */
+  --muted-surface: #F5EDE6;
+  /* Light Oat */
+  --accent: #818263;
+  /* Savory Sage */
+  --accent-foreground: #FFFDF9;
+  /* Warm White */
 }
 
 body {
   background:
-    radial-gradient(circle at 20% -10%, #e2e8f0 0%, transparent 35%),
-    radial-gradient(circle at 100% 0%, #e2e8f0 0%, transparent 30%),
+    radial-gradient(circle at 15% -5%, #DDBAAE 0%, transparent 45%),
+    radial-gradient(circle at 90% 10%, #c2c39544 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, #DDBAAE22 0%, transparent 50%),
     var(--background);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--foreground);
   min-height: 100vh;
 }
@@ -36,4 +36,25 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color matching palette */
+::selection {
+  background: #c2c39566;
+  color: var(--foreground);
+}
+
+/* Glassmorphism utility class — apply to any card container */
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 250, 0.15) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  }
 }
