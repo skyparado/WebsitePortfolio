@@ -22,7 +22,7 @@ async function checkDbConnection() {
     conn.release()
   } catch (err) {
     console.error('DB connection failed:', err.message)
-    process.exit(1)     // crash the server hard if DB is unreachable
+    console.warn('Backend is running, but database connection is unavailable. Ensure MySQL is running and .env is configured correctly.')
   }
 }
 
