@@ -1,20 +1,42 @@
-import CreatePostForm from "./CreatePostForm";
-import PostCard from "./PostCard";
+import { getPosts, type Post } from "@/lib/api";
+import { PostCard } from "@/components/PostCard";
 
-const DUMMY_POSTS = [
-  { id: 1, title: "Getting started with Next.js", content: "Next.js is a great framework." },
-  { id: 2, title: "Styling with Tailwind CSS", content: "Tailwind CSS makes styling fun." },
-];
+export async function PostsSection() {
+  let posts: Post[] = [];
+  let error: string | null = null;
 
-export default function PostsSection() {
+  try {
+    posts = await getPosts();
+  } catch {
+    error = "Failed to fetch posts";
+  }
+
   return (
-    <div className="w-full max-w-4xl flex flex-col items-center">
-      <CreatePostForm />
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-        {DUMMY_POSTS.map(post => (
-          <PostCard key={post.id} title={post.title} content={post.content} />
-        ))}
+    <section id="posts" className="space-y-5">
+      <div className="space-y-1">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Posts</h2>
+        <p className="text-sm text-muted">Fetched from the workshop API endpoint.</p>
       </div>
-    </div>
+
+      {error ? (
+        <div className="rounded-2xl border border-border bg-card p-6 text-sm text-muted shadow-sm">
+          We could not load posts right now. Please try again later.
+        </div>
+      ) : null}
+
+      {!error && posts.length === 0 ? (
+        <div className="rounded-2xl border border-border bg-card p-6 text-sm text-muted shadow-sm">
+          No posts yet. Check back soon.
+        </div>
+      ) : null}
+
+      {!error && posts.length > 0 ? (
+        <div className="grid gap-4 sm:gap-5">
+          {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </div>
+      ) : null}
+    </section>
   );
 }

@@ -1,40 +1,66 @@
 "use client";
 
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 
-export default function CreatePostForm() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+import { submitPost } from "@/lib/services";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Submitting", { title, content });
-  };
+export function CreatePostForm() {
+    const [text, setText] = useState("");
+    const [error, setError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-  return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md mb-8 w-full max-w-lg">
-      <h2 className="text-2xl mb-4 font-semibold">Create a new post</h2>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
-        <input 
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-          type="text" 
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Content</label>
-        <textarea 
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-          rows={3}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-      </div>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-        Submit
-      </button>
-    </form>
-  );
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        setError(null);
+        setIsSubmitting(true);
+
+        try {
+            await submitPost(text);
+            setText("");
+            window.location.reload();
+        } catch (error) {
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setError("We could not create your post right now. Please try again.");
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
+    return (
+        <section className="space-y-3 rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6">
+            <div className="space-y-1">
+                <h2 className="text-xl font-semibold tracking-tight text-foreground">Create post</h2>
+                <p className="text-sm text-muted">Share a quick update from the workshop.</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-3">
+                <textarea
+                    name="body"
+                    required
+                    minLength={1}
+                    value={text}
+                    onChange={(event) => setText(event.target.value)}
+                    placeholder="Write your post here..."
+                    className="min-h-28 w-full resize-y rounded-xl border border-border bg-background px-4 py-3 text-sm leading-6 text-foreground outline-none transition placeholder:text-muted focus:ring-2 focus:ring-accent/20"
+                />
+
+                {error ? <p className="text-sm text-red-700">{error}</p> : null}
+
+                <div className="flex items-center justify-between gap-3">
+                    <p className="text-xs text-muted">Write a short post update</p>
+                    <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                        {isSubmitting ? "Posting..." : "Post"}
+                    </button>
+                </div>
+            </form>
+        </section>
+    );
 }
