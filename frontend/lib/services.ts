@@ -1,4 +1,4 @@
-const POSTS_API_URL = "https://backendworkshop.app.dlsu-lscs.org/api/posts";
+const POSTS_API_URL = "http://localhost:5000/api/posts";
 
 export async function submitPost(text: string): Promise<void> {
   const body = text.trim();

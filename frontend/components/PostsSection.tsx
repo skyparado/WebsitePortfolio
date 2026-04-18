@@ -15,7 +15,7 @@ export async function PostsSection() {
     <section id="posts" className="space-y-5">
       <div className="space-y-1">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Posts</h2>
-        <p className="text-sm text-muted">Fetched from the workshop API endpoint.</p>
+        <p className="text-sm text-muted">Recent updates and thoughts.</p>
       </div>
 
       {error ? (

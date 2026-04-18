@@ -7,6 +7,7 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js';
+import postRoutes from './routes/postRoutes.js';
 import { authenticateApiSecret, errorHandler } from './middleware/error.middleware.js';
 
 const app = express()
@@ -15,6 +16,7 @@ app.use(cors())                                   // 2. allow frontend to call t
 app.use(express.json())                           // 3. parse JSON request bodies
 
 app.use("/api/users", userRoutes)                 // 4. mount routes
+app.use("/api/posts", postRoutes)                 // mount post routes
 
 app.use(errorHandler)
 

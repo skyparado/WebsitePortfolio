@@ -3,7 +3,7 @@ export type Post = {
   body: string;
 };
 
-const POSTS_API_URL = "https://backendworkshop.app.dlsu-lscs.org/api/posts";
+const POSTS_API_URL = "http://localhost:5000/api/posts";
 
 export async function getPosts(): Promise<Post[]> {
   const response = await fetch(POSTS_API_URL, { cache: "no-store" });

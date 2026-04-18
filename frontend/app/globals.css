@@ -5,17 +5,17 @@
 :root {
   --background: #EFD7CF;
   /* Peach Protein */
-  --foreground: #3A3B2C;
+  --foreground: #2f1f03;
   /* Darkened Savory Sage */
   --card: #FFFDF9;
   /* Warm white for cards - solid color so Tailwind processes it */
   --border: #c2c395;
   /* Avocado Smoothie */
-  --muted: #818263;
+  --muted: #3f401a;
   /* Savory Sage */
   --muted-surface: #F5EDE6;
   /* Light Oat */
-  --accent: #818263;
+  --accent: #473918;
   /* Savory Sage */
   --accent-foreground: #FFFDF9;
   /* Warm White */
@@ -24,7 +24,7 @@
 body {
   background:
     radial-gradient(circle at 15% -5%, #DDBAAE 0%, transparent 45%),
-    radial-gradient(circle at 90% 10%, #c2c39544 0%, transparent 50%),
+    radial-gradient(circle at 90% 10%, #5a5a4444 0%, transparent 50%),
     radial-gradient(circle at 50% 100%, #DDBAAE22 0%, transparent 50%),
     var(--background);
   background-repeat: no-repeat;
@@ -38,14 +38,13 @@ a {
   text-decoration: none;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
 /* Selection color matching palette */
 ::selection {
-  background: #c2c39566;
+  background: #47333a66;
   color: var(--foreground);
 }
 
